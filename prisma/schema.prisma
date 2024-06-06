@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model typeusers {
+  type_user_id Int     @id
+  description  String
+  users        users[]
+}
+
+model users {
+  user_id      Int         @id
+  username     String
+  typeusers    typeusers?  @relation(fields: [type_user_id], references: [type_user_id])
+  type_user_id Int?
+  incidents    incidents[]
+}
+
+model incidents {
+  incidents_id      Int             @id
+  title             String
+  description       String
+  ubication         String
+  created_at        DateTime
+  date              DateTime
+  status            status?         @relation(fields: [status_id], references: [status_id])
+  status_id         Int?
+  type_incidents    type_incidents? @relation(fields: [type_incidents_id], references: [type_incidents_id])
+  type_incidents_id Int?
+  image_cover       image_cover?    @relation(fields: [image_cover_id], references: [image_cover_id])
+  image_cover_id    Int?
+  users             users?          @relation(fields: [users_id], references: [user_id])
+  users_id          Int?
+}
+
+model image_cover {
+  image_cover_id       Int                @id
+  img_url              String
+  description          String
+  image_description    image_description? @relation(fields: [image_description_id], references: [image_description_id])
+  image_description_id Int?
+  incident_id          incidents[]
+}
+
+model image_description {
+  image_description_id Int           @id
+  img_url              String
+  description          String
+  image_cover_id       image_cover[]
+}
+
+model status {
+  status_id   Int         @id
+  decription  String
+  incident_id incidents[]
+}
+
+model type_incidents {
+  type_incidents_id Int         @id
+  description       String
+  incident_id       incidents[]
+}
