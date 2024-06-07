@@ -14,13 +14,13 @@ datasource db {
 }
 
 model typeusers {
-  type_user_id Int     @id
+  type_user_id Int     @id @default(autoincrement())
   description  String
   users        users[]
 }
 
 model users {
-  user_id      Int         @id
+  user_id      Int         @id @default(autoincrement())
   username     String
   typeusers    typeusers?  @relation(fields: [type_user_id], references: [type_user_id])
   type_user_id Int?
@@ -28,12 +28,11 @@ model users {
 }
 
 model incidents {
-  incidents_id      Int             @id
+  incidents_id      Int             @id @default(autoincrement())
   title             String
   description       String
   ubication         String
-  created_at        DateTime
-  date              DateTime
+  date              DateTime        @default(now())
   status            status?         @relation(fields: [status_id], references: [status_id])
   status_id         Int?
   type_incidents    type_incidents? @relation(fields: [type_incidents_id], references: [type_incidents_id])
@@ -45,7 +44,7 @@ model incidents {
 }
 
 model image_cover {
-  image_cover_id       Int                @id
+  image_cover_id       Int                @id @default(autoincrement())
   img_url              String
   description          String
   image_description    image_description? @relation(fields: [image_description_id], references: [image_description_id])
@@ -54,20 +53,20 @@ model image_cover {
 }
 
 model image_description {
-  image_description_id Int           @id
+  image_description_id Int           @id @default(autoincrement())
   img_url              String
   description          String
   image_cover_id       image_cover[]
 }
 
 model status {
-  status_id   Int         @id
+  status_id   Int         @id @default(autoincrement())
   decription  String
   incident_id incidents[]
 }
 
 model type_incidents {
-  type_incidents_id Int         @id
+  type_incidents_id Int         @id @default(autoincrement())
   description       String
   incident_id       incidents[]
 }
