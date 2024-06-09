@@ -27,14 +27,42 @@ let IncidentTypesController = class IncidentTypesController {
     findAll() {
         return this.incidentTypesService.findAll();
     }
-    findOne(id) {
-        return this.incidentTypesService.findOne(+id);
+    async findOne(id) {
+        const incidentType = await this.incidentTypesService.findOne(id);
+        if (!incidentType) {
+            throw new common_1.NotFoundException(`incidentType with id ${id} not found`);
+        }
+        return incidentType;
     }
-    update(id, updateIncidentTypeDto) {
-        return this.incidentTypesService.update(+id, updateIncidentTypeDto);
+    async update(id, updateIncidentTypeDto) {
+        try {
+            const updateIncidentType = await this.incidentTypesService.update(id, updateIncidentTypeDto);
+            if (!updateIncidentType) {
+                throw new common_1.NotFoundException(`incidentType with id ${id} not found`);
+            }
+            return updateIncidentType;
+        }
+        catch (error) {
+            if (error.code === 'P2025') {
+                throw new common_1.NotFoundException(`incidentType with id ${id} not found`);
+            }
+            throw error;
+        }
     }
-    remove(id) {
-        return this.incidentTypesService.remove(+id);
+    async remove(id) {
+        try {
+            const deleteIncidentType = await this.incidentTypesService.remove(id);
+            if (!deleteIncidentType) {
+                throw new common_1.NotFoundException(`incidentType with id ${id} not found`);
+            }
+            return deleteIncidentType;
+        }
+        catch (error) {
+            if (error.code === 'P2025') {
+                throw new common_1.NotFoundException(`incidentType with id ${id} not found`);
+            }
+            throw error;
+        }
     }
 };
 exports.IncidentTypesController = IncidentTypesController;
@@ -53,25 +81,25 @@ __decorate([
 ], IncidentTypesController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
 ], IncidentTypesController.prototype, "findOne", null);
 __decorate([
-    (0, common_1.Patch)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_incident_type_dto_1.UpdateIncidentTypeDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Number, update_incident_type_dto_1.UpdateIncidentTypeDto]),
+    __metadata("design:returntype", Promise)
 ], IncidentTypesController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
 ], IncidentTypesController.prototype, "remove", null);
 exports.IncidentTypesController = IncidentTypesController = __decorate([
     (0, common_1.Controller)('incident-types'),

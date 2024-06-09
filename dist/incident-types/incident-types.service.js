@@ -5,28 +5,43 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IncidentTypesService = void 0;
 const common_1 = require("@nestjs/common");
+const prisma_service_1 = require("../prisma/prisma.service");
 let IncidentTypesService = class IncidentTypesService {
+    constructor(prisma) {
+        this.prisma = prisma;
+    }
     create(createIncidentTypeDto) {
-        return 'This action adds a new incidentType';
+        return this.prisma.type_incidents.create({ data: createIncidentTypeDto });
     }
     findAll() {
-        return `This action returns all incidentTypes`;
+        return this.prisma.type_incidents.findMany();
     }
     findOne(id) {
-        return `This action returns a #${id} incidentType`;
+        return this.prisma.type_incidents.findUnique({
+            where: { type_incidents_id: id },
+        });
     }
     update(id, updateIncidentTypeDto) {
-        return `This action updates a #${id} incidentType`;
+        return this.prisma.type_incidents.update({
+            where: { type_incidents_id: id },
+            data: updateIncidentTypeDto,
+        });
     }
     remove(id) {
-        return `This action removes a #${id} incidentType`;
+        return this.prisma.type_incidents.delete({
+            where: { type_incidents_id: id },
+        });
     }
 };
 exports.IncidentTypesService = IncidentTypesService;
 exports.IncidentTypesService = IncidentTypesService = __decorate([
-    (0, common_1.Injectable)()
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
 ], IncidentTypesService);
 //# sourceMappingURL=incident-types.service.js.map

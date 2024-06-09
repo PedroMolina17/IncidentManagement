@@ -3,9 +3,11 @@ import {
   Get,
   Post,
   Body,
-  Patch,
+  Put,
   Param,
   Delete,
+  NotFoundException,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { IncidentTypesService } from './incident-types.service';
 import { CreateIncidentTypeDto } from './dto/create-incident-type.dto';
@@ -26,20 +28,49 @@ export class IncidentTypesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.incidentTypesService.findOne(+id);
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    const incidentType = await this.incidentTypesService.findOne(id);
+    if (!incidentType) {
+      throw new NotFoundException(`incidentType with id ${id} not found`);
+    }
+    return incidentType;
   }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
+  @Put(':id')
+  async update(
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateIncidentTypeDto: UpdateIncidentTypeDto,
   ) {
-    return this.incidentTypesService.update(+id, updateIncidentTypeDto);
+    try {
+      const updateIncidentType = await this.incidentTypesService.update(
+        id,
+        updateIncidentTypeDto,
+      );
+      if (!updateIncidentType) {
+        throw new NotFoundException(`incidentType with id ${id} not found`);
+      }
+      return updateIncidentType;
+    } catch (error) {
+      if (error.code === 'P2025') {
+        throw new NotFoundException(`incidentType with id ${id} not found`);
+      }
+      throw error;
+    }
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.incidentTypesService.remove(+id);
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    try {
+      const deleteIncidentType = await this.incidentTypesService.remove(id);
+      if (!deleteIncidentType) {
+        throw new NotFoundException(`incidentType with id ${id} not found`);
+      }
+      return deleteIncidentType;
+    } catch (error) {
+      if (error.code === 'P2025') {
+        throw new NotFoundException(`incidentType with id ${id} not found`);
+      }
+      throw error;
+    }
   }
 }

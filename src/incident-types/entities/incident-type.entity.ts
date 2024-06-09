@@ -1,1 +1,4 @@
-export class IncidentType {}
+export class IncidentType {
+  incident_type_id: number;
+  description: string;
+}

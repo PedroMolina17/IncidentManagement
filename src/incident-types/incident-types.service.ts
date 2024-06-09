@@ -1,26 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { CreateIncidentTypeDto } from './dto/create-incident-type.dto';
 import { UpdateIncidentTypeDto } from './dto/update-incident-type.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class IncidentTypesService {
+  constructor(private prisma: PrismaService) {}
   create(createIncidentTypeDto: CreateIncidentTypeDto) {
-    return 'This action adds a new incidentType';
+    return this.prisma.type_incidents.create({ data: createIncidentTypeDto });
   }
 
   findAll() {
-    return `This action returns all incidentTypes`;
+    return this.prisma.type_incidents.findMany();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} incidentType`;
+    return this.prisma.type_incidents.findUnique({
+      where: { type_incidents_id: id },
+    });
   }
 
   update(id: number, updateIncidentTypeDto: UpdateIncidentTypeDto) {
-    return `This action updates a #${id} incidentType`;
+    return this.prisma.type_incidents.update({
+      where: { type_incidents_id: id },
+      data: updateIncidentTypeDto,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} incidentType`;
+    return this.prisma.type_incidents.delete({
+      where: { type_incidents_id: id },
+    });
   }
 }
