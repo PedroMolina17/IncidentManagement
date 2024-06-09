@@ -6,19 +6,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.TypeUsersModule = void 0;
 const common_1 = require("@nestjs/common");
-const incident_types_module_1 = require("./incident-types/incident-types.module");
-const type_users_module_1 = require("./type-users/type-users.module");
-const prisma_module_1 = require("./prisma/prisma.module");
-let AppModule = class AppModule {
+const type_users_service_1 = require("./type-users.service");
+const type_users_controller_1 = require("./type-users.controller");
+const prisma_module_1 = require("../prisma/prisma.module");
+let TypeUsersModule = class TypeUsersModule {
 };
-exports.AppModule = AppModule;
-exports.AppModule = AppModule = __decorate([
+exports.TypeUsersModule = TypeUsersModule;
+exports.TypeUsersModule = TypeUsersModule = __decorate([
     (0, common_1.Module)({
-        imports: [incident_types_module_1.IncidentTypesModule, type_users_module_1.TypeUsersModule, prisma_module_1.PrismaModule],
-        controllers: [],
-        providers: [],
+        controllers: [type_users_controller_1.TypeUsersController],
+        providers: [type_users_service_1.TypeUsersService],
+        imports: [prisma_module_1.PrismaModule],
     })
-], AppModule);
-//# sourceMappingURL=app.module.js.map
+], TypeUsersModule);
+//# sourceMappingURL=type-users.module.js.map

@@ -6,23 +6,32 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class TypeUsersService {
   constructor(private prisma: PrismaService) {}
-  create(createTypeUserDto: CreateTypeUserDto) {
-    return 'This action adds a new typeUser';
+
+  async create(createTypeUserDto: CreateTypeUserDto) {
+    return await this.prisma.typeusers.create({ data: createTypeUserDto });
   }
 
-  findAll() {
-    return `This action returns all typeUsers`;
+  async findAll() {
+    return await this.prisma.typeusers.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} typeUser`;
+  async findOne(id: number) {
+    return await this.prisma.typeusers.findUnique({
+      where: { type_user_id: id },
+    });
   }
 
-  update(id: number, updateTypeUserDto: UpdateTypeUserDto) {
-    return `This action updates a #${id} typeUser`;
+  async update(
+    id: number,
+    data: UpdateTypeUserDto,
+  ): Promise<UpdateTypeUserDto> {
+    return await this.prisma.typeusers.update({
+      where: { type_user_id: id },
+      data: data,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} typeUser`;
+  async remove(id: number) {
+    return await this.prisma.typeusers.delete({ where: { type_user_id: id } });
   }
 }

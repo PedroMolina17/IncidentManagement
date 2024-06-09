@@ -10,6 +10,7 @@ exports.IncidentTypesModule = void 0;
 const common_1 = require("@nestjs/common");
 const incident_types_service_1 = require("./incident-types.service");
 const incident_types_controller_1 = require("./incident-types.controller");
+const prisma_module_1 = require("../prisma/prisma.module");
 let IncidentTypesModule = class IncidentTypesModule {
 };
 exports.IncidentTypesModule = IncidentTypesModule;
@@ -17,6 +18,7 @@ exports.IncidentTypesModule = IncidentTypesModule = __decorate([
     (0, common_1.Module)({
         controllers: [incident_types_controller_1.IncidentTypesController],
         providers: [incident_types_service_1.IncidentTypesService],
+        imports: [prisma_module_1.PrismaModule],
     })
 ], IncidentTypesModule);
 //# sourceMappingURL=incident-types.module.js.map

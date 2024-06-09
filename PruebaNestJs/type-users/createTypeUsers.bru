@@ -1,0 +1,17 @@
+meta {
+  name: createTypeUsers
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3000/type-users
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "description":"admin"
+  }
+}
