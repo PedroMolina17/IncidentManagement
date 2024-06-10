@@ -1,0 +1,17 @@
+meta {
+  name: updateIncidentTypes
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://localhost:3000/incident-types/1
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "description":"Electricidad"
+  }
+}

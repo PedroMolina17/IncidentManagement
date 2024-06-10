@@ -9,39 +9,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IncidentTypesService = void 0;
+exports.StatusService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
-let IncidentTypesService = class IncidentTypesService {
+let StatusService = class StatusService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async create(createIncidentTypeDto) {
-        await this.prisma.type_incidents.create({ data: createIncidentTypeDto });
+    create(createStatusDto) {
+        return this.prisma.status.create({ data: createStatusDto });
     }
-    async findAll() {
-        await this.prisma.type_incidents.findMany();
+    findAll() {
+        return this.prisma.status.findMany();
     }
-    async findOne(id) {
-        return await this.prisma.type_incidents.findUnique({
-            where: { type_incidents_id: id },
+    findOne(id) {
+        return this.prisma.status.findUnique({ where: { status_id: id } });
+    }
+    update(id, updateStatusDto) {
+        return this.prisma.status.update({
+            where: { status_id: id },
+            data: updateStatusDto,
         });
     }
-    async update(id, updateIncidentTypeDto) {
-        return await this.prisma.type_incidents.update({
-            where: { type_incidents_id: id },
-            data: updateIncidentTypeDto,
-        });
-    }
-    async remove(id) {
-        return await this.prisma.type_incidents.delete({
-            where: { type_incidents_id: id },
-        });
+    remove(id) {
+        return this.prisma.status.delete({ where: { status_id: id } });
     }
 };
-exports.IncidentTypesService = IncidentTypesService;
-exports.IncidentTypesService = IncidentTypesService = __decorate([
+exports.StatusService = StatusService;
+exports.StatusService = StatusService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService])
-], IncidentTypesService);
-//# sourceMappingURL=incident-types.service.js.map
+], StatusService);
+//# sourceMappingURL=status.service.js.map

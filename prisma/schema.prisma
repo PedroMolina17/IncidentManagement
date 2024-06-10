@@ -61,7 +61,7 @@ model image_description {
 
 model status {
   status_id   Int         @id @default(autoincrement())
-  decription  String
+  description String
   incident_id incidents[]
 }
 
