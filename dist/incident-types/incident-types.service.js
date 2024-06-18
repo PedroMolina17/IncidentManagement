@@ -20,7 +20,7 @@ let IncidentTypesService = class IncidentTypesService {
         await this.prisma.type_incidents.create({ data: createIncidentTypeDto });
     }
     async findAll() {
-        await this.prisma.type_incidents.findMany();
+        return await this.prisma.type_incidents.findMany();
     }
     async findOne(id) {
         return await this.prisma.type_incidents.findUnique({

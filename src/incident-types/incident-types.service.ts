@@ -11,7 +11,7 @@ export class IncidentTypesService {
   }
 
   async findAll() {
-    await this.prisma.type_incidents.findMany();
+    return await this.prisma.type_incidents.findMany();
   }
 
   async findOne(id: number) {

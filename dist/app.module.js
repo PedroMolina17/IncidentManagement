@@ -12,12 +12,13 @@ const incident_types_module_1 = require("./incident-types/incident-types.module"
 const type_users_module_1 = require("./type-users/type-users.module");
 const prisma_module_1 = require("./prisma/prisma.module");
 const status_module_1 = require("./status/status.module");
+const users_module_1 = require("./users/users.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [incident_types_module_1.IncidentTypesModule, type_users_module_1.TypeUsersModule, prisma_module_1.PrismaModule, status_module_1.StatusModule],
+        imports: [incident_types_module_1.IncidentTypesModule, type_users_module_1.TypeUsersModule, prisma_module_1.PrismaModule, status_module_1.StatusModule, users_module_1.UsersModule],
         controllers: [],
         providers: [],
     })

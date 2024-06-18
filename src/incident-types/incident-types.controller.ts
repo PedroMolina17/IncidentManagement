@@ -18,13 +18,13 @@ export class IncidentTypesController {
   constructor(private readonly incidentTypesService: IncidentTypesService) {}
 
   @Post()
-  create(@Body() createIncidentTypeDto: CreateIncidentTypeDto) {
-    return this.incidentTypesService.create(createIncidentTypeDto);
+  async create(@Body() createIncidentTypeDto: CreateIncidentTypeDto) {
+    return await this.incidentTypesService.create(createIncidentTypeDto);
   }
 
   @Get()
-  findAll() {
-    return this.incidentTypesService.findAll();
+  async findAll() {
+    return await this.incidentTypesService.findAll();
   }
 
   @Get(':id')

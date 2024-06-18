@@ -21,11 +21,11 @@ let StatusController = class StatusController {
     constructor(statusService) {
         this.statusService = statusService;
     }
-    create(createStatusDto) {
-        return this.statusService.create(createStatusDto);
+    async create(createStatusDto) {
+        return await this.statusService.create(createStatusDto);
     }
-    findAll() {
-        return this.statusService.findAll();
+    async findAll() {
+        return await this.statusService.findAll();
     }
     async findOne(id) {
         const status = await this.statusService.findOne(id);
@@ -71,13 +71,13 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_status_dto_1.CreateStatusDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], StatusController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], StatusController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),

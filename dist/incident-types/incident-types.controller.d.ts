@@ -5,7 +5,10 @@ export declare class IncidentTypesController {
     private readonly incidentTypesService;
     constructor(incidentTypesService: IncidentTypesService);
     create(createIncidentTypeDto: CreateIncidentTypeDto): Promise<void>;
-    findAll(): Promise<void>;
+    findAll(): Promise<{
+        type_incidents_id: number;
+        description: string;
+    }[]>;
     findOne(id: number): Promise<{
         type_incidents_id: number;
         description: string;

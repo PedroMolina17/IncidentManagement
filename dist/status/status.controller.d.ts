@@ -4,11 +4,11 @@ import { UpdateStatusDto } from './dto/update-status.dto';
 export declare class StatusController {
     private readonly statusService;
     constructor(statusService: StatusService);
-    create(createStatusDto: CreateStatusDto): import("@prisma/client").Prisma.Prisma__statusClient<{
+    create(createStatusDto: CreateStatusDto): Promise<{
         status_id: number;
         description: string;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs>;
-    findAll(): import("@prisma/client").Prisma.PrismaPromise<{
+    }>;
+    findAll(): Promise<{
         status_id: number;
         description: string;
     }[]>;

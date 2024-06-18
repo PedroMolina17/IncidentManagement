@@ -18,13 +18,13 @@ export class StatusController {
   constructor(private readonly statusService: StatusService) {}
 
   @Post()
-  create(@Body() createStatusDto: CreateStatusDto) {
-    return this.statusService.create(createStatusDto);
+  async create(@Body() createStatusDto: CreateStatusDto) {
+    return await this.statusService.create(createStatusDto);
   }
 
   @Get()
-  findAll() {
-    return this.statusService.findAll();
+  async findAll() {
+    return await this.statusService.findAll();
   }
 
   @Get(':id')

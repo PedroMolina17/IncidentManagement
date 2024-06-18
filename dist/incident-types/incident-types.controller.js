@@ -21,11 +21,11 @@ let IncidentTypesController = class IncidentTypesController {
     constructor(incidentTypesService) {
         this.incidentTypesService = incidentTypesService;
     }
-    create(createIncidentTypeDto) {
-        return this.incidentTypesService.create(createIncidentTypeDto);
+    async create(createIncidentTypeDto) {
+        return await this.incidentTypesService.create(createIncidentTypeDto);
     }
-    findAll() {
-        return this.incidentTypesService.findAll();
+    async findAll() {
+        return await this.incidentTypesService.findAll();
     }
     async findOne(id) {
         const incidentType = await this.incidentTypesService.findOne(id);
@@ -71,13 +71,13 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_incident_type_dto_1.CreateIncidentTypeDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], IncidentTypesController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], IncidentTypesController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),

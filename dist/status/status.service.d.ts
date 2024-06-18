@@ -4,24 +4,24 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export declare class StatusService {
     private prisma;
     constructor(prisma: PrismaService);
-    create(createStatusDto: CreateStatusDto): import("@prisma/client").Prisma.Prisma__statusClient<{
+    create(createStatusDto: CreateStatusDto): Promise<{
         status_id: number;
         description: string;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs>;
-    findAll(): import("@prisma/client").Prisma.PrismaPromise<{
+    }>;
+    findAll(): Promise<{
         status_id: number;
         description: string;
     }[]>;
-    findOne(id: number): import("@prisma/client").Prisma.Prisma__statusClient<{
+    findOne(id: number): Promise<{
         status_id: number;
         description: string;
-    }, null, import("@prisma/client/runtime/library").DefaultArgs>;
-    update(id: number, updateStatusDto: UpdateStatusDto): import("@prisma/client").Prisma.Prisma__statusClient<{
+    }>;
+    update(id: number, updateStatusDto: UpdateStatusDto): Promise<{
         status_id: number;
         description: string;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs>;
-    remove(id: number): import("@prisma/client").Prisma.Prisma__statusClient<{
+    }>;
+    remove(id: number): Promise<{
         status_id: number;
         description: string;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs>;
+    }>;
 }

@@ -16,23 +16,23 @@ let StatusService = class StatusService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    create(createStatusDto) {
-        return this.prisma.status.create({ data: createStatusDto });
+    async create(createStatusDto) {
+        return await this.prisma.status.create({ data: createStatusDto });
     }
-    findAll() {
-        return this.prisma.status.findMany();
+    async findAll() {
+        return await this.prisma.status.findMany();
     }
-    findOne(id) {
-        return this.prisma.status.findUnique({ where: { status_id: id } });
+    async findOne(id) {
+        return await this.prisma.status.findUnique({ where: { status_id: id } });
     }
-    update(id, updateStatusDto) {
-        return this.prisma.status.update({
+    async update(id, updateStatusDto) {
+        return await this.prisma.status.update({
             where: { status_id: id },
             data: updateStatusDto,
         });
     }
-    remove(id) {
-        return this.prisma.status.delete({ where: { status_id: id } });
+    async remove(id) {
+        return await this.prisma.status.delete({ where: { status_id: id } });
     }
 };
 exports.StatusService = StatusService;
