@@ -1,0 +1,22 @@
+meta {
+  name: createTypeUsers
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:3000/image-description
+  body: multipartForm
+  auth: none
+}
+
+body:json {
+  {
+    "description":"Finish"
+  }
+}
+
+body:multipart-form {
+  img_url: @file(C:\Users\Usuario\Downloads\homer_simpson.png)
+  description: aaaaaaaaaaaaaaaaaa
+}

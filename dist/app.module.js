@@ -13,12 +13,25 @@ const type_users_module_1 = require("./type-users/type-users.module");
 const prisma_module_1 = require("./prisma/prisma.module");
 const status_module_1 = require("./status/status.module");
 const users_module_1 = require("./users/users.module");
+const image_description_module_1 = require("./image-description/image-description.module");
+const path_1 = require("path");
+const serve_static_1 = require("@nestjs/serve-static");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [incident_types_module_1.IncidentTypesModule, type_users_module_1.TypeUsersModule, prisma_module_1.PrismaModule, status_module_1.StatusModule, users_module_1.UsersModule],
+        imports: [
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, '..', '..', 'public'),
+            }),
+            incident_types_module_1.IncidentTypesModule,
+            type_users_module_1.TypeUsersModule,
+            prisma_module_1.PrismaModule,
+            status_module_1.StatusModule,
+            users_module_1.UsersModule,
+            image_description_module_1.ImageDescriptionModule,
+        ],
         controllers: [],
         providers: [],
     })

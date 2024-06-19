@@ -4,9 +4,22 @@ import { TypeUsersModule } from './type-users/type-users.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { StatusModule } from './status/status.module';
 import { UsersModule } from './users/users.module';
+import { ImageDescriptionModule } from './image-description/image-description.module';
+import { join } from 'path';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
-  imports: [IncidentTypesModule, TypeUsersModule, PrismaModule, StatusModule, UsersModule],
+  imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '..', 'public'),
+    }),
+    IncidentTypesModule,
+    TypeUsersModule,
+    PrismaModule,
+    StatusModule,
+    UsersModule,
+    ImageDescriptionModule,
+  ],
   controllers: [],
   providers: [],
 })
