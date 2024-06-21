@@ -9,6 +9,7 @@ import {
   Delete,
   UseInterceptors,
   UploadedFile,
+  BadRequestException,
 } from '@nestjs/common';
 import { ImageDescriptionService } from './image-description.service';
 import { CreateImageDescriptionDto } from './dto/create-image-description.dto';
@@ -33,9 +34,12 @@ export class ImageDescriptionController {
   )
   async postImageDescription(
     @UploadedFile() file: Express.Multer.File,
-    @Body() body: CreateImageDescriptionDto,
+    @Body() body: any,
   ) {
-    const filePath = `/public/images/image-description/${file.filename}`;
+    if (!file) {
+      throw new BadRequestException('File is missing');
+    }
+    const filePath = `/images/image-description/${file.filename}`;
     const createImageDescriptionDto: CreateImageDescriptionDto = {
       img_url: filePath,
       description: body.description,

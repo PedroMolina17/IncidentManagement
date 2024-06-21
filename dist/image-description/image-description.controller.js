@@ -16,7 +16,6 @@ exports.ImageDescriptionController = void 0;
 const image_description_helper_1 = require("./helper/image-description.helper");
 const common_1 = require("@nestjs/common");
 const image_description_service_1 = require("./image-description.service");
-const create_image_description_dto_1 = require("./dto/create-image-description.dto");
 const update_image_description_dto_1 = require("./dto/update-image-description.dto");
 const platform_express_1 = require("@nestjs/platform-express");
 const multer_1 = require("multer");
@@ -25,7 +24,10 @@ let ImageDescriptionController = class ImageDescriptionController {
         this.imageDescriptionService = imageDescriptionService;
     }
     async postImageDescription(file, body) {
-        const filePath = `/public/images/image-description/${file.filename}`;
+        if (!file) {
+            throw new common_1.BadRequestException('File is missing');
+        }
+        const filePath = `/images/image-description/${file.filename}`;
         const createImageDescriptionDto = {
             img_url: filePath,
             description: body.description,
@@ -58,7 +60,7 @@ __decorate([
     __param(0, (0, common_1.UploadedFile)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, create_image_description_dto_1.CreateImageDescriptionDto]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], ImageDescriptionController.prototype, "postImageDescription", null);
 __decorate([
