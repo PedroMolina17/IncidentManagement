@@ -16,22 +16,29 @@ let ImageDescriptionService = class ImageDescriptionService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    create(createImageDescriptionDto) {
-        return this.prisma.image_description.create({
+    async create(createImageDescriptionDto) {
+        return await this.prisma.image_description.create({
             data: createImageDescriptionDto,
         });
     }
     async findAll() {
         return await this.prisma.image_description.findMany();
     }
-    findOne(id) {
-        return `This action returns a #${id} imageDescription`;
+    async findOne(id) {
+        return await this.prisma.image_description.findUnique({
+            where: { image_description_id: id },
+        });
     }
-    update(id, updateImageDescriptionDto) {
-        return `This action updates a #${id} imageDescription`;
+    async update(id, updateImageDescriptionDto) {
+        return await this.prisma.image_description.update({
+            where: { image_description_id: id },
+            data: updateImageDescriptionDto,
+        });
     }
-    remove(id) {
-        return `This action removes a #${id} imageDescription`;
+    async remove(id) {
+        return await this.prisma.image_description.delete({
+            where: { image_description_id: id },
+        });
     }
 };
 exports.ImageDescriptionService = ImageDescriptionService;

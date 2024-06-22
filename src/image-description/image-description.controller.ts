@@ -10,6 +10,8 @@ import {
   UseInterceptors,
   UploadedFile,
   BadRequestException,
+  ParseIntPipe,
+  NotFoundException,
 } from '@nestjs/common';
 import { ImageDescriptionService } from './image-description.service';
 import { CreateImageDescriptionDto } from './dto/create-image-description.dto';
@@ -56,20 +58,38 @@ export class ImageDescriptionController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.imageDescriptionService.findOne(+id);
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    const imageDescription = await this.imageDescriptionService.findOne(id);
+    if (!imageDescription) {
+      throw new NotFoundException(`imageDescription with id ${id} not found`);
+    }
+    return imageDescription;
   }
 
   @Put(':id')
-  update(
-    @Param('id') id: string,
+  async update(
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateImageDescriptionDto: UpdateImageDescriptionDto,
   ) {
-    return this.imageDescriptionService.update(+id, updateImageDescriptionDto);
+    return await this.imageDescriptionService.update(
+      id,
+      updateImageDescriptionDto,
+    );
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.imageDescriptionService.remove(+id);
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    try {
+      const imageDescription = await this.imageDescriptionService.remove(id);
+      if (!imageDescription) {
+        throw new NotFoundException(`ImageDescription with id ${id} not found`);
+      }
+      return imageDescription;
+    } catch (error) {
+      if (error.code === 'P2025') {
+        throw new NotFoundException(`ImageDescription with id ${id} not found`);
+      }
+      throw error;
+    }
   }
 }

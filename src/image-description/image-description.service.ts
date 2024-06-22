@@ -7,8 +7,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class ImageDescriptionService {
   constructor(private prisma: PrismaService) {}
 
-  create(createImageDescriptionDto: CreateImageDescriptionDto) {
-    return this.prisma.image_description.create({
+  async create(createImageDescriptionDto: CreateImageDescriptionDto) {
+    return await this.prisma.image_description.create({
       data: createImageDescriptionDto,
     });
   }
@@ -17,15 +17,25 @@ export class ImageDescriptionService {
     return await this.prisma.image_description.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} imageDescription`;
+  async findOne(id: number) {
+    return await this.prisma.image_description.findUnique({
+      where: { image_description_id: id },
+    });
   }
 
-  update(id: number, updateImageDescriptionDto: UpdateImageDescriptionDto) {
-    return `This action updates a #${id} imageDescription`;
+  async update(
+    id: number,
+    updateImageDescriptionDto: UpdateImageDescriptionDto,
+  ) {
+    return await this.prisma.image_description.update({
+      where: { image_description_id: id },
+      data: updateImageDescriptionDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} imageDescription`;
+  async remove(id: number) {
+    return await this.prisma.image_description.delete({
+      where: { image_description_id: id },
+    });
   }
 }

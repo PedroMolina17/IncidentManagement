@@ -4,17 +4,29 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export declare class ImageDescriptionService {
     private prisma;
     constructor(prisma: PrismaService);
-    create(createImageDescriptionDto: CreateImageDescriptionDto): import("@prisma/client").Prisma.Prisma__image_descriptionClient<{
+    create(createImageDescriptionDto: CreateImageDescriptionDto): Promise<{
         image_description_id: number;
         img_url: string;
         description: string;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs>;
+    }>;
     findAll(): Promise<{
         image_description_id: number;
         img_url: string;
         description: string;
     }[]>;
-    findOne(id: number): string;
-    update(id: number, updateImageDescriptionDto: UpdateImageDescriptionDto): string;
-    remove(id: number): string;
+    findOne(id: number): Promise<{
+        image_description_id: number;
+        img_url: string;
+        description: string;
+    }>;
+    update(id: number, updateImageDescriptionDto: UpdateImageDescriptionDto): Promise<{
+        image_description_id: number;
+        img_url: string;
+        description: string;
+    }>;
+    remove(id: number): Promise<{
+        image_description_id: number;
+        img_url: string;
+        description: string;
+    }>;
 }

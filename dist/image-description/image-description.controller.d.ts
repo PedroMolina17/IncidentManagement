@@ -14,7 +14,19 @@ export declare class ImageDescriptionController {
         img_url: string;
         description: string;
     }[]>;
-    findOne(id: string): string;
-    update(id: string, updateImageDescriptionDto: UpdateImageDescriptionDto): string;
-    remove(id: string): string;
+    findOne(id: number): Promise<{
+        image_description_id: number;
+        img_url: string;
+        description: string;
+    }>;
+    update(id: number, updateImageDescriptionDto: UpdateImageDescriptionDto): Promise<{
+        image_description_id: number;
+        img_url: string;
+        description: string;
+    }>;
+    remove(id: number): Promise<{
+        image_description_id: number;
+        img_url: string;
+        description: string;
+    }>;
 }

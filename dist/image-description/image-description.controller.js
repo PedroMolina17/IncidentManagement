@@ -38,14 +38,30 @@ let ImageDescriptionController = class ImageDescriptionController {
     async findAll() {
         return await this.imageDescriptionService.findAll();
     }
-    findOne(id) {
-        return this.imageDescriptionService.findOne(+id);
+    async findOne(id) {
+        const imageDescription = await this.imageDescriptionService.findOne(id);
+        if (!imageDescription) {
+            throw new common_1.NotFoundException(`imageDescription with id ${id} not found`);
+        }
+        return imageDescription;
     }
-    update(id, updateImageDescriptionDto) {
-        return this.imageDescriptionService.update(+id, updateImageDescriptionDto);
+    async update(id, updateImageDescriptionDto) {
+        return await this.imageDescriptionService.update(id, updateImageDescriptionDto);
     }
-    remove(id) {
-        return this.imageDescriptionService.remove(+id);
+    async remove(id) {
+        try {
+            const imageDescription = await this.imageDescriptionService.remove(id);
+            if (!imageDescription) {
+                throw new common_1.NotFoundException(`ImageDescription with id ${id} not found`);
+            }
+            return imageDescription;
+        }
+        catch (error) {
+            if (error.code === 'P2025') {
+                throw new common_1.NotFoundException(`ImageDescription with id ${id} not found`);
+            }
+            throw error;
+        }
     }
 };
 exports.ImageDescriptionController = ImageDescriptionController;
@@ -71,25 +87,25 @@ __decorate([
 ], ImageDescriptionController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
 ], ImageDescriptionController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Put)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_image_description_dto_1.UpdateImageDescriptionDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Number, update_image_description_dto_1.UpdateImageDescriptionDto]),
+    __metadata("design:returntype", Promise)
 ], ImageDescriptionController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
 ], ImageDescriptionController.prototype, "remove", null);
 exports.ImageDescriptionController = ImageDescriptionController = __decorate([
     (0, common_1.Controller)('image-description'),
