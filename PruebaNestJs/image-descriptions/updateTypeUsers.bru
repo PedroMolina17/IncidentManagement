@@ -5,8 +5,8 @@ meta {
 }
 
 put {
-  url: http://localhost:3000/image-description/6
-  body: json
+  url: http://localhost:3000/image-description/3
+  body: multipartForm
   auth: none
 }
 
@@ -14,4 +14,8 @@ body:json {
   {
     "description":"user"
   }
+}
+
+body:multipart-form {
+  description: c
 }

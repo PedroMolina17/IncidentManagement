@@ -71,10 +71,21 @@ export class ImageDescriptionController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateImageDescriptionDto: UpdateImageDescriptionDto,
   ) {
-    return await this.imageDescriptionService.update(
-      id,
-      updateImageDescriptionDto,
-    );
+    try {
+      const ImageDescription = await this.imageDescriptionService.update(
+        id,
+        updateImageDescriptionDto,
+      );
+      if (!ImageDescription) {
+        throw new NotFoundException(`ImageDescription with id ${id} not found`);
+      }
+      return ImageDescription;
+    } catch (error) {
+      if (error.code === 'P2025') {
+        throw new NotFoundException(`ImageDescription with id ${id} not found`);
+      }
+      throw error;
+    }
   }
 
   @Delete(':id')

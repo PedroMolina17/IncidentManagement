@@ -16,6 +16,7 @@ const users_module_1 = require("./users/users.module");
 const image_description_module_1 = require("./image-description/image-description.module");
 const path_1 = require("path");
 const serve_static_1 = require("@nestjs/serve-static");
+const image_cover_module_1 = require("./image-cover/image-cover.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -31,6 +32,7 @@ exports.AppModule = AppModule = __decorate([
             status_module_1.StatusModule,
             users_module_1.UsersModule,
             image_description_module_1.ImageDescriptionModule,
+            image_cover_module_1.ImageCoverModule,
         ],
         controllers: [],
         providers: [],

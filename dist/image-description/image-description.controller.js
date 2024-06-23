@@ -46,7 +46,19 @@ let ImageDescriptionController = class ImageDescriptionController {
         return imageDescription;
     }
     async update(id, updateImageDescriptionDto) {
-        return await this.imageDescriptionService.update(id, updateImageDescriptionDto);
+        try {
+            const ImageDescription = await this.imageDescriptionService.update(id, updateImageDescriptionDto);
+            if (!ImageDescription) {
+                throw new common_1.NotFoundException(`ImageDescription with id ${id} not found`);
+            }
+            return ImageDescription;
+        }
+        catch (error) {
+            if (error.code === 'P2025') {
+                throw new common_1.NotFoundException(`ImageDescription with id ${id} not found`);
+            }
+            throw error;
+        }
     }
     async remove(id) {
         try {
