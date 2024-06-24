@@ -44,19 +44,19 @@ model incidents {
 }
 
 model image_cover {
-  image_cover_id       Int                @id @default(autoincrement())
-  img_url              String
-  description          String
-  image_description    image_description? @relation(fields: [image_description_id], references: [image_description_id])
-  image_description_id Int?
-  incident_id          incidents[]
+  image_cover_id    Int                 @id @default(autoincrement())
+  img_url           String
+  description       String
+  incidents         incidents[]
+  image_description image_description[]
 }
 
 model image_description {
-  image_description_id Int           @id @default(autoincrement())
+  image_description_id Int          @id @default(autoincrement())
   img_url              String
   description          String
-  image_cover_id       image_cover[]
+  image_cover          image_cover? @relation(fields: [image_cover_id], references: [image_cover_id])
+  image_cover_id       Int?
 }
 
 model status {

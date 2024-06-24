@@ -1,0 +1,22 @@
+meta {
+  name: updateTypeUsers
+  type: http
+  seq: 2
+}
+
+put {
+  url: http://localhost:3000/image-cover/2
+  body: multipartForm
+  auth: none
+}
+
+body:json {
+  {
+    "description":"456"
+  }
+}
+
+body:multipart-form {
+  description: zzzzzzzz
+  img_url: @file(C:\Users\Usuario\Downloads\448829859_2152595395110241_5733202482687971809_n.jpg)
+}

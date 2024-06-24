@@ -26,7 +26,7 @@ export class ImageDescriptionService {
   async update(
     id: number,
     updateImageDescriptionDto: UpdateImageDescriptionDto,
-  ) {
+  ): Promise<UpdateImageDescriptionDto> {
     return await this.prisma.image_description.update({
       where: { image_description_id: id },
       data: updateImageDescriptionDto,
