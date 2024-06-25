@@ -16,7 +16,6 @@ exports.ImageDescriptionController = void 0;
 const image_description_helper_1 = require("./helper/image-description.helper");
 const common_1 = require("@nestjs/common");
 const image_description_service_1 = require("./image-description.service");
-const update_image_description_dto_1 = require("./dto/update-image-description.dto");
 const platform_express_1 = require("@nestjs/platform-express");
 const multer_1 = require("multer");
 let ImageDescriptionController = class ImageDescriptionController {
@@ -24,16 +23,25 @@ let ImageDescriptionController = class ImageDescriptionController {
         this.imageDescriptionService = imageDescriptionService;
     }
     async postImageDescription(file, body) {
-        if (!file) {
-            throw new common_1.BadRequestException('File is missing');
+        try {
+            if (!file) {
+                throw new common_1.BadRequestException('File is missing');
+            }
+            const filePath = `/images/image-description/${file.filename}`;
+            const createImageDescriptionDto = {
+                img_url: filePath,
+                description: body.description,
+                image_cover_id: Number(body.image_cover_id),
+            };
+            const savedImage = await this.imageDescriptionService.create(createImageDescriptionDto);
+            return savedImage;
         }
-        const filePath = `/images/image-description/${file.filename}`;
-        const createImageDescriptionDto = {
-            img_url: filePath,
-            description: body.description,
-        };
-        const savedImage = await this.imageDescriptionService.create(createImageDescriptionDto);
-        return savedImage;
+        catch (error) {
+            if (error.code === 'P2003') {
+                throw new common_1.BadRequestException(`The ImageCover ID does not exista`);
+            }
+            throw error;
+        }
     }
     async findAll() {
         return await this.imageDescriptionService.findAll();
@@ -45,8 +53,16 @@ let ImageDescriptionController = class ImageDescriptionController {
         }
         return imageDescription;
     }
-    async update(id, updateImageDescriptionDto) {
+    async update(file, id, body) {
         try {
+            let updateImageDescriptionDto = {
+                description: body.description,
+                image_cover_id: Number(body.image_cover_id),
+            };
+            if (file) {
+                const filePath = `/public/images/image-cover/${file.filename}`;
+                updateImageDescriptionDto.img_url = filePath;
+            }
             const ImageDescription = await this.imageDescriptionService.update(id, updateImageDescriptionDto);
             if (!ImageDescription) {
                 throw new common_1.NotFoundException(`ImageDescription with id ${id} not found`);
@@ -56,6 +72,9 @@ let ImageDescriptionController = class ImageDescriptionController {
         catch (error) {
             if (error.code === 'P2025') {
                 throw new common_1.NotFoundException(`ImageDescription with id ${id} not found`);
+            }
+            else if (error.code === 'P2003') {
+                throw new common_1.BadRequestException(`ImageCover with id ${body.image_cover_id} not found`);
             }
             throw error;
         }
@@ -106,10 +125,17 @@ __decorate([
 ], ImageDescriptionController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Put)(':id'),
-    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
-    __param(1, (0, common_1.Body)()),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('img_url', {
+        storage: (0, multer_1.diskStorage)({
+            destination: './public/images/image-cover',
+            filename: image_description_helper_1.renameImage,
+        }),
+    })),
+    __param(0, (0, common_1.UploadedFile)()),
+    __param(1, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, update_image_description_dto_1.UpdateImageDescriptionDto]),
+    __metadata("design:paramtypes", [Object, Number, Object]),
     __metadata("design:returntype", Promise)
 ], ImageDescriptionController.prototype, "update", null);
 __decorate([

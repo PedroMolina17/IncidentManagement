@@ -38,18 +38,26 @@ export class ImageDescriptionController {
     @UploadedFile() file: Express.Multer.File,
     @Body() body: any,
   ) {
-    if (!file) {
-      throw new BadRequestException('File is missing');
+    try {
+      if (!file) {
+        throw new BadRequestException('File is missing');
+      }
+      const filePath = `/images/image-description/${file.filename}`;
+      const createImageDescriptionDto: CreateImageDescriptionDto = {
+        img_url: filePath,
+        description: body.description,
+        image_cover_id: Number(body.image_cover_id),
+      };
+      const savedImage = await this.imageDescriptionService.create(
+        createImageDescriptionDto,
+      );
+      return savedImage;
+    } catch (error) {
+      if (error.code === 'P2003') {
+        throw new BadRequestException(`The ImageCover ID does not exista`);
+      }
+      throw error;
     }
-    const filePath = `/images/image-description/${file.filename}`;
-    const createImageDescriptionDto: CreateImageDescriptionDto = {
-      img_url: filePath,
-      description: body.description,
-    };
-    const savedImage = await this.imageDescriptionService.create(
-      createImageDescriptionDto,
-    );
-    return savedImage;
   }
 
   @Get()
@@ -67,11 +75,29 @@ export class ImageDescriptionController {
   }
 
   @Put(':id')
+  @UseInterceptors(
+    FileInterceptor('img_url', {
+      storage: diskStorage({
+        destination: './public/images/image-cover',
+        filename: renameImage,
+      }),
+    }),
+  )
   async update(
+    @UploadedFile() file: Express.Multer.File,
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateImageDescriptionDto: UpdateImageDescriptionDto,
+    @Body() body: any,
   ) {
     try {
+      let updateImageDescriptionDto: UpdateImageDescriptionDto = {
+        description: body.description,
+        image_cover_id: Number(body.image_cover_id),
+      };
+      if (file) {
+        const filePath = `/public/images/image-cover/${file.filename}`;
+        updateImageDescriptionDto.img_url = filePath;
+      }
+
       const ImageDescription = await this.imageDescriptionService.update(
         id,
         updateImageDescriptionDto,
@@ -83,6 +109,10 @@ export class ImageDescriptionController {
     } catch (error) {
       if (error.code === 'P2025') {
         throw new NotFoundException(`ImageDescription with id ${id} not found`);
+      } else if (error.code === 'P2003') {
+        throw new BadRequestException(
+          `ImageCover with id ${body.image_cover_id} not found`,
+        );
       }
       throw error;
     }

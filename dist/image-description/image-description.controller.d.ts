@@ -22,7 +22,7 @@ export declare class ImageDescriptionController {
         description: string;
         image_cover_id: number;
     }>;
-    update(id: number, updateImageDescriptionDto: UpdateImageDescriptionDto): Promise<UpdateImageDescriptionDto>;
+    update(file: Express.Multer.File, id: number, body: any): Promise<UpdateImageDescriptionDto>;
     remove(id: number): Promise<{
         image_description_id: number;
         img_url: string;
