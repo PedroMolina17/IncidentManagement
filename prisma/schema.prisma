@@ -22,7 +22,7 @@ model typeusers {
 model users {
   user_id      Int         @id @default(autoincrement())
   username     String
-  email        String
+  email        String      @unique()
   password     String
   typeusers    typeusers?  @relation(fields: [type_user_id], references: [type_user_id])
   type_user_id Int?
