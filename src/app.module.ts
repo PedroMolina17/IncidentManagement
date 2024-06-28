@@ -8,6 +8,7 @@ import { ImageDescriptionModule } from './image-description/image-description.mo
 import { join } from 'path';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { ImageCoverModule } from './image-cover/image-cover.module';
+import { IncidentsModule } from './incidents/incidents.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ImageCoverModule } from './image-cover/image-cover.module';
     UsersModule,
     ImageDescriptionModule,
     ImageCoverModule,
+    IncidentsModule,
   ],
   controllers: [],
   providers: [],
