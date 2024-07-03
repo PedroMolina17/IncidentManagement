@@ -11,8 +11,18 @@ export class UsersService {
     return await this.prisma.users.create({ data: createUserDto });
   }
 
-  async findAll() {
-    return await this.prisma.users.findMany();
+  async findAll(filters?: any) {
+    const where: any = {};
+
+    if (filters.username) {
+      where.username = { contains: filters.username };
+    }
+
+    if (filters.email) {
+      where.email = { contains: filters.email };
+    }
+
+    return await this.prisma.users.findMany({ where });
   }
 
   async findOne(id: number) {

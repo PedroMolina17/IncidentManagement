@@ -9,6 +9,7 @@ import {
   ParseIntPipe,
   BadRequestException,
   NotFoundException,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -31,8 +32,8 @@ export class UsersController {
   }
 
   @Get()
-  async findAll() {
-    return await this.usersService.findAll();
+  async findAll(@Query() query: any) {
+    return await this.usersService.findAll(query);
   }
 
   @Get(':id')

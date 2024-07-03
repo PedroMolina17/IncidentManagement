@@ -32,8 +32,8 @@ let UsersController = class UsersController {
             throw error;
         }
     }
-    async findAll() {
-        return await this.usersService.findAll();
+    async findAll(query) {
+        return await this.usersService.findAll(query);
     }
     async findOne(id) {
         try {
@@ -94,8 +94,9 @@ __decorate([
 ], UsersController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "findAll", null);
 __decorate([

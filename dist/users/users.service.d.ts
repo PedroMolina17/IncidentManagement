@@ -11,7 +11,7 @@ export declare class UsersService {
         password: string;
         type_user_id: number;
     }>;
-    findAll(): Promise<{
+    findAll(filters?: any): Promise<{
         user_id: number;
         username: string;
         email: string;

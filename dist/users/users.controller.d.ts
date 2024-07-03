@@ -11,7 +11,7 @@ export declare class UsersController {
         password: string;
         type_user_id: number;
     }>;
-    findAll(): Promise<{
+    findAll(query: any): Promise<{
         user_id: number;
         username: string;
         email: string;
