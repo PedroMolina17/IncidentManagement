@@ -5,7 +5,11 @@ meta {
 }
 
 get {
-  url: http://localhost:3000/users
+  url: http://localhost:3000/users?username=Pedro
   body: json
   auth: none
+}
+
+query {
+  username: Pedro
 }

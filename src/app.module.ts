@@ -9,6 +9,7 @@ import { join } from 'path';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { ImageCoverModule } from './image-cover/image-cover.module';
 import { IncidentsModule } from './incidents/incidents.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { IncidentsModule } from './incidents/incidents.module';
     ImageDescriptionModule,
     ImageCoverModule,
     IncidentsModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

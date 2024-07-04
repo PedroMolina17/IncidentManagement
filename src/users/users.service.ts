@@ -13,11 +13,9 @@ export class UsersService {
 
   async findAll(filters?: any) {
     const where: any = {};
-
     if (filters.username) {
       where.username = { contains: filters.username };
     }
-
     if (filters.email) {
       where.email = { contains: filters.email };
     }
@@ -38,5 +36,11 @@ export class UsersService {
 
   async remove(id: number) {
     return await this.prisma.users.delete({ where: { user_id: id } });
+  }
+
+  async findOneByEmail(email: string) {
+    return this.prisma.users.findUnique({
+      where: { email },
+    });
   }
 }
