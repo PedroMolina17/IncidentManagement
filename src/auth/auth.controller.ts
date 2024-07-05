@@ -9,15 +9,15 @@ export class AuthController {
 
   @Post('register')
   register(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
+    return this.authService.validateUser(createAuthDto);
   }
   @Post('auth')
   auth(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
+    return this.authService.validateUser(createAuthDto);
   }
 
   @Post('login')
   login(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
+    return this.authService.login(createAuthDto);
   }
 }

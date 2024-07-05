@@ -21,13 +21,13 @@ let AuthController = class AuthController {
         this.authService = authService;
     }
     register(createAuthDto) {
-        return this.authService.create(createAuthDto);
+        return this.authService.validateUser(createAuthDto);
     }
     auth(createAuthDto) {
-        return this.authService.create(createAuthDto);
+        return this.authService.validateUser(createAuthDto);
     }
     login(createAuthDto) {
-        return this.authService.create(createAuthDto);
+        return this.authService.login(createAuthDto);
     }
 };
 exports.AuthController = AuthController;

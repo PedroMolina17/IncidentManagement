@@ -39,4 +39,11 @@ export declare class UsersService {
         password: string;
         type_user_id: number;
     }>;
+    findOneByEmail(email: string): Promise<{
+        user_id: number;
+        username: string;
+        email: string;
+        password: string;
+        type_user_id: number;
+    }>;
 }
