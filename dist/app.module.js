@@ -18,6 +18,8 @@ const path_1 = require("path");
 const serve_static_1 = require("@nestjs/serve-static");
 const image_cover_module_1 = require("./image-cover/image-cover.module");
 const incidents_module_1 = require("./incidents/incidents.module");
+const auth_module_1 = require("./auth/auth.module");
+const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -35,6 +37,8 @@ exports.AppModule = AppModule = __decorate([
             image_description_module_1.ImageDescriptionModule,
             image_cover_module_1.ImageCoverModule,
             incidents_module_1.IncidentsModule,
+            auth_module_1.AuthModule,
+            config_1.ConfigModule.forRoot({ isGlobal: true }),
         ],
         controllers: [],
         providers: [],

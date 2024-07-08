@@ -5,11 +5,15 @@ meta {
 }
 
 get {
-  url: http://localhost:3000/users?username=Pedro
+  url: http://localhost:3000/users
   body: json
-  auth: none
+  auth: bearer
 }
 
 query {
-  username: Pedro
+  ~username: Pedro
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvbW9saW5hbm9hQGdtYWlsLmNvbSIsImlhdCI6MTcyMDQxMDQ1OSwiZXhwIjoxNzIwNDEwNTA5fQ.z2rEfARvax4SyW_IcgT8YhC0_2zmfN8XTvB0JSmEGS8
 }
