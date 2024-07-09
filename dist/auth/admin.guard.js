@@ -9,10 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthGuard = void 0;
+exports.AdminGuard = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
-let AuthGuard = class AuthGuard {
+let AdminGuard = class AdminGuard {
     constructor(jwtService) {
         this.jwtService = jwtService;
     }
@@ -20,27 +20,33 @@ let AuthGuard = class AuthGuard {
         const request = context.switchToHttp().getRequest();
         const token = this.extractTokenFromHeader(request);
         if (!token) {
-            throw new common_1.UnauthorizedException();
+            throw new common_1.UnauthorizedException('Token not found');
         }
         try {
             const payload = await this.jwtService.verifyAsync(token, {
                 secret: process.env.JWT_SECRET,
             });
-            request['user'] = payload;
+            if (payload.role !== 1) {
+                throw new common_1.UnauthorizedException('Unauthorized access');
+            }
+            request.user = payload;
+            return true;
         }
-        catch {
-            throw new common_1.UnauthorizedException();
+        catch (error) {
+            throw new common_1.UnauthorizedException('Invalid token');
         }
-        return true;
     }
     extractTokenFromHeader(request) {
-        const [type, token] = request.headers.authorization?.split(' ') ?? [];
-        return type === 'Bearer' ? token : undefined;
+        const authHeader = request.headers.authorization;
+        if (authHeader && authHeader.startsWith('Bearer ')) {
+            return authHeader.slice(7);
+        }
+        return undefined;
     }
 };
-exports.AuthGuard = AuthGuard;
-exports.AuthGuard = AuthGuard = __decorate([
+exports.AdminGuard = AdminGuard;
+exports.AdminGuard = AdminGuard = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [jwt_1.JwtService])
-], AuthGuard);
-//# sourceMappingURL=auth.guard.js.map
+], AdminGuard);
+//# sourceMappingURL=admin.guard.js.map

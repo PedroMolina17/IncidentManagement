@@ -19,11 +19,11 @@ let AuthService = class AuthService {
         this.UsersService = UsersService;
         this.jwtService = jwtService;
     }
-    async validateUser(email, pass) {
-        const users = await this.UsersService.findAll({ email });
+    async validateUser(data) {
+        const users = await this.UsersService.findAll({ email: data.email });
         if (users.length > 0) {
             const user = users[0];
-            if (bcrypt.compareSync(pass, user.password)) {
+            if (bcrypt.compareSync(data.password, user.password)) {
                 const { password, ...result } = user;
                 return result;
             }
@@ -31,7 +31,11 @@ let AuthService = class AuthService {
         return null;
     }
     async login(user) {
-        const payload = { email: user.email, sub: user.id };
+        const payload = {
+            email: user.email,
+            sub: user.id,
+            role: user.type_user_id,
+        };
         return {
             access_token: await this.jwtService.signAsync(payload),
         };
