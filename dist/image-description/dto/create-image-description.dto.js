@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateImageDescriptionDto = void 0;
+const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 class CreateImageDescriptionDto {
 }
@@ -18,15 +19,11 @@ __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateImageDescriptionDto.prototype, "img_url", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
 ], CreateImageDescriptionDto.prototype, "description", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsNumber)(),
+    (0, class_transformer_1.Type)(() => Number),
     __metadata("design:type", Number)
 ], CreateImageDescriptionDto.prototype, "image_cover_id", void 0);
 //# sourceMappingURL=create-image-description.dto.js.map

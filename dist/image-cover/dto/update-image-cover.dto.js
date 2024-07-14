@@ -18,10 +18,5 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], UpdateImageCoverDto.prototype, "img_url", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
 ], UpdateImageCoverDto.prototype, "description", void 0);
 //# sourceMappingURL=update-image-cover.dto.js.map

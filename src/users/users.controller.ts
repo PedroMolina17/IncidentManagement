@@ -38,6 +38,11 @@ export class UsersController {
     return await this.usersService.findAll(query);
   }
 
+  @Get('count')
+  async countAll() {
+    return await this.usersService.count();
+  }
+
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
     try {

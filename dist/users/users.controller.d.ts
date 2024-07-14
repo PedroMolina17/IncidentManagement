@@ -18,6 +18,7 @@ export declare class UsersController {
         password: string;
         type_user_id: number;
     }[]>;
+    countAll(): Promise<number>;
     findOne(id: number): Promise<{
         user_id: number;
         username: string;

@@ -22,6 +22,9 @@ let UsersService = class UsersService {
         const userData = { ...createUserDto, password };
         return await this.prisma.users.create({ data: userData });
     }
+    async count() {
+        return await this.prisma.users.count({ where: { type_user_id: 1 } });
+    }
     async findAll(filters) {
         const where = {};
         if (filters.username) {

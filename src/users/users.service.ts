@@ -14,6 +14,10 @@ export class UsersService {
     return await this.prisma.users.create({ data: userData });
   }
 
+  async count(): Promise<number> {
+    return await this.prisma.users.count({ where: { type_user_id: 1 } });
+  }
+
   async findAll(filters?: any) {
     const where: any = {};
     if (filters.username) {

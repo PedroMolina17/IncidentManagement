@@ -18,10 +18,5 @@ __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateImageCoverDto.prototype, "img_url", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
 ], CreateImageCoverDto.prototype, "description", void 0);
 //# sourceMappingURL=create-image-cover.dto.js.map

@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImageCoverController = void 0;
 const common_1 = require("@nestjs/common");
 const image_cover_service_1 = require("./image-cover.service");
+const create_image_cover_dto_1 = require("./dto/create-image-cover.dto");
+const update_image_cover_dto_1 = require("./dto/update-image-cover.dto");
 const platform_express_1 = require("@nestjs/platform-express");
 const multer_1 = require("multer");
 const image_description_helper_1 = require("./helper/image-description.helper");
@@ -94,7 +96,7 @@ __decorate([
     __param(0, (0, common_1.UploadedFile)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, create_image_cover_dto_1.CreateImageCoverDto]),
     __metadata("design:returntype", Promise)
 ], ImageCoverController.prototype, "postImageDescription", null);
 __decorate([
@@ -122,7 +124,7 @@ __decorate([
     __param(1, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Number, Object]),
+    __metadata("design:paramtypes", [Object, Number, update_image_cover_dto_1.UpdateImageCoverDto]),
     __metadata("design:returntype", Promise)
 ], ImageCoverController.prototype, "update", null);
 __decorate([

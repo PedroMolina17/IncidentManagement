@@ -16,6 +16,7 @@ exports.ImageDescriptionController = void 0;
 const image_description_helper_1 = require("./helper/image-description.helper");
 const common_1 = require("@nestjs/common");
 const image_description_service_1 = require("./image-description.service");
+const create_image_description_dto_1 = require("./dto/create-image-description.dto");
 const platform_express_1 = require("@nestjs/platform-express");
 const multer_1 = require("multer");
 let ImageDescriptionController = class ImageDescriptionController {
@@ -38,7 +39,7 @@ let ImageDescriptionController = class ImageDescriptionController {
         }
         catch (error) {
             if (error.code === 'P2003') {
-                throw new common_1.BadRequestException(`The ImageCover ID does not exista`);
+                throw new common_1.BadRequestException(`The ImageCover ID does not exist`);
             }
             throw error;
         }
@@ -107,7 +108,7 @@ __decorate([
     __param(0, (0, common_1.UploadedFile)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, create_image_description_dto_1.CreateImageDescriptionDto]),
     __metadata("design:returntype", Promise)
 ], ImageDescriptionController.prototype, "postImageDescription", null);
 __decorate([

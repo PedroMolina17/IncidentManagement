@@ -36,6 +36,9 @@ let UsersController = class UsersController {
     async findAll(query) {
         return await this.usersService.findAll(query);
     }
+    async countAll() {
+        return await this.usersService.count();
+    }
     async findOne(id) {
         try {
             const status = await this.usersService.findOne(id);
@@ -101,6 +104,12 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)('count'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "countAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),

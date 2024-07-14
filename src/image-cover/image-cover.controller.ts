@@ -34,7 +34,7 @@ export class ImageCoverController {
   )
   async postImageDescription(
     @UploadedFile() file: Express.Multer.File,
-    @Body() body: any,
+    @Body() body: CreateImageCoverDto,
   ) {
     if (!file) {
       throw new BadRequestException('File is missing');
@@ -74,7 +74,7 @@ export class ImageCoverController {
   async update(
     @UploadedFile() file: Express.Multer.File,
     @Param('id', ParseIntPipe) id: number,
-    @Body() body: any,
+    @Body() body: UpdateImageCoverDto,
   ) {
     try {
       let updateImageCoverDto: UpdateImageCoverDto = {

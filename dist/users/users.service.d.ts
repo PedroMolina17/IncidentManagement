@@ -11,6 +11,7 @@ export declare class UsersService {
         password: string;
         type_user_id: number;
     }>;
+    count(): Promise<number>;
     findAll(filters?: any): Promise<{
         user_id: number;
         username: string;

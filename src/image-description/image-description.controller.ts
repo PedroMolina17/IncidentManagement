@@ -36,7 +36,7 @@ export class ImageDescriptionController {
   )
   async postImageDescription(
     @UploadedFile() file: Express.Multer.File,
-    @Body() body: any,
+    @Body() body: CreateImageDescriptionDto,
   ) {
     try {
       if (!file) {
@@ -54,7 +54,7 @@ export class ImageDescriptionController {
       return savedImage;
     } catch (error) {
       if (error.code === 'P2003') {
-        throw new BadRequestException(`The ImageCover ID does not exista`);
+        throw new BadRequestException(`The ImageCover ID does not exist`);
       }
       throw error;
     }
