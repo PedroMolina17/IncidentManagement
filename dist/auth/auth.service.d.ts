@@ -10,6 +10,7 @@ export declare class AuthService {
         username: string;
         email: string;
         type_user_id: number;
+        room_id: number;
     }>;
     login(user: any): Promise<{
         access_token: string;

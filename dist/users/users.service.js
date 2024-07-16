@@ -22,8 +22,12 @@ let UsersService = class UsersService {
         const userData = { ...createUserDto, password };
         return await this.prisma.users.create({ data: userData });
     }
-    async count() {
-        return await this.prisma.users.count({ where: { type_user_id: 1 } });
+    async count(filters) {
+        const where = {};
+        if (filters && filters.type_user_id) {
+            where.type_user_id = { equals: filters.type_user_id };
+        }
+        return await this.prisma.users.count({ where });
     }
     async findAll(filters) {
         const where = {};

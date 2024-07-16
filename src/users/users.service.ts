@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcryptjs';
+import { equal } from 'assert';
 
 @Injectable()
 export class UsersService {
@@ -14,8 +15,12 @@ export class UsersService {
     return await this.prisma.users.create({ data: userData });
   }
 
-  async count(): Promise<number> {
-    return await this.prisma.users.count({ where: { type_user_id: 1 } });
+  async count(filters?: any): Promise<number> {
+    const where: any = {};
+    if (filters && filters.type_user_id) {
+      where.type_user_id = { equals: filters.type_user_id };
+    }
+    return await this.prisma.users.count({ where });
   }
 
   async findAll(filters?: any) {
@@ -26,7 +31,6 @@ export class UsersService {
     if (filters.email) {
       where.email = { contains: filters.email };
     }
-
     return await this.prisma.users.findMany({ where });
   }
 

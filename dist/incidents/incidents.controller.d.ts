@@ -13,7 +13,7 @@ export declare class IncidentsController {
         status_id: number;
         type_incidents_id: number;
         image_cover_id: number;
-        users_id: number;
+        room_id: number;
     }>;
     findAll(): Promise<{
         incidents_id: number;
@@ -24,7 +24,7 @@ export declare class IncidentsController {
         status_id: number;
         type_incidents_id: number;
         image_cover_id: number;
-        users_id: number;
+        room_id: number;
     }[]>;
     findOne(id: string): Promise<{
         incidents_id: number;
@@ -35,7 +35,7 @@ export declare class IncidentsController {
         status_id: number;
         type_incidents_id: number;
         image_cover_id: number;
-        users_id: number;
+        room_id: number;
     }>;
     update(id: string, updateIncidentDto: UpdateIncidentDto): Promise<{
         incidents_id: number;
@@ -46,7 +46,7 @@ export declare class IncidentsController {
         status_id: number;
         type_incidents_id: number;
         image_cover_id: number;
-        users_id: number;
+        room_id: number;
     }>;
     remove(id: string): Promise<{
         incidents_id: number;
@@ -57,6 +57,6 @@ export declare class IncidentsController {
         status_id: number;
         type_incidents_id: number;
         image_cover_id: number;
-        users_id: number;
+        room_id: number;
     }>;
 }

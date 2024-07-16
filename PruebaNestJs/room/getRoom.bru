@@ -1,0 +1,17 @@
+meta {
+  name: getRoom
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:3000/room
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name":"A2"
+  }
+}

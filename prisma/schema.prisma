@@ -20,13 +20,21 @@ model typeusers {
 }
 
 model users {
-  user_id      Int         @id @default(autoincrement())
+  user_id      Int        @id @default(autoincrement())
   username     String
-  email        String      @unique()
+  email        String     @unique()
   password     String
-  typeusers    typeusers?  @relation(fields: [type_user_id], references: [type_user_id])
+  typeusers    typeusers? @relation(fields: [type_user_id], references: [type_user_id])
   type_user_id Int?
-  incidents    incidents[]
+  room         room?      @relation(fields: [room_id], references: [room_id])
+  room_id      Int?
+}
+
+model room {
+  room_id   Int         @id @default(autoincrement())
+  name      String      @unique
+  users     users[]
+  incidents incidents[]
 }
 
 model incidents {
@@ -41,8 +49,8 @@ model incidents {
   type_incidents_id Int?
   image_cover       image_cover?    @relation(fields: [image_cover_id], references: [image_cover_id])
   image_cover_id    Int?
-  users             users?          @relation(fields: [users_id], references: [user_id])
-  users_id          Int?
+  room              room?           @relation(fields: [room_id], references: [room_id])
+  room_id           Int?
 }
 
 model image_cover {

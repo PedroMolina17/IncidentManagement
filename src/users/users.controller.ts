@@ -16,6 +16,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserGuard } from 'src/auth/user.guard';
+import { CountDto } from './dto/count-user.dto';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -39,8 +40,8 @@ export class UsersController {
   }
 
   @Get('count')
-  async countAll() {
-    return await this.usersService.count();
+  async countAll(@Query() query: CountDto) {
+    return this.usersService.count(query);
   }
 
   @Get(':id')

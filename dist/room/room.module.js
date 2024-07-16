@@ -5,21 +5,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Incident = void 0;
-const class_validator_1 = require("class-validator");
-class Incident {
-}
-exports.Incident = Incident;
-__decorate([
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], Incident.prototype, "room_id", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], Incident.prototype, "name", void 0);
-//# sourceMappingURL=incident.entity.js.map
+exports.RoomModule = void 0;
+const common_1 = require("@nestjs/common");
+const room_service_1 = require("./room.service");
+const room_controller_1 = require("./room.controller");
+const prisma_module_1 = require("../prisma/prisma.module");
+let RoomModule = class RoomModule {
+};
+exports.RoomModule = RoomModule;
+exports.RoomModule = RoomModule = __decorate([
+    (0, common_1.Module)({
+        controllers: [room_controller_1.RoomController],
+        providers: [room_service_1.RoomService],
+        imports: [prisma_module_1.PrismaModule],
+    })
+], RoomModule);
+//# sourceMappingURL=room.module.js.map

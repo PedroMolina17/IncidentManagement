@@ -9,17 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Incident = void 0;
+exports.CreateRoomDto = void 0;
 const class_validator_1 = require("class-validator");
-class Incident {
+class CreateRoomDto {
 }
-exports.Incident = Incident;
+exports.CreateRoomDto = CreateRoomDto;
 __decorate([
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], Incident.prototype, "room_id", void 0);
-__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], Incident.prototype, "name", void 0);
-//# sourceMappingURL=incident.entity.js.map
+], CreateRoomDto.prototype, "name", void 0);
+//# sourceMappingURL=create-room.dto.js.map

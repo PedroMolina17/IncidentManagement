@@ -5,7 +5,11 @@ meta {
 }
 
 get {
-  url: http://localhost:3000/users/count
+  url: http://localhost:3000/users/count?type_user_id=1
   body: none
   auth: none
+}
+
+query {
+  type_user_id: 1
 }

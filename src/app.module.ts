@@ -11,6 +11,7 @@ import { ImageCoverModule } from './image-cover/image-cover.module';
 import { IncidentsModule } from './incidents/incidents.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { RoomModule } from './room/room.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { ConfigModule } from '@nestjs/config';
     IncidentsModule,
     AuthModule,
     ConfigModule.forRoot({ isGlobal: true }),
+    RoomModule,
   ],
   controllers: [],
   providers: [],

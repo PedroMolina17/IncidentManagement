@@ -18,6 +18,7 @@ const users_service_1 = require("./users.service");
 const create_user_dto_1 = require("./dto/create-user.dto");
 const update_user_dto_1 = require("./dto/update-user.dto");
 const user_guard_1 = require("../auth/user.guard");
+const count_user_dto_1 = require("./dto/count-user.dto");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
@@ -36,8 +37,8 @@ let UsersController = class UsersController {
     async findAll(query) {
         return await this.usersService.findAll(query);
     }
-    async countAll() {
-        return await this.usersService.count();
+    async countAll(query) {
+        return this.usersService.count(query);
     }
     async findOne(id) {
         try {
@@ -106,8 +107,9 @@ __decorate([
 ], UsersController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)('count'),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [count_user_dto_1.CountDto]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "countAll", null);
 __decorate([
