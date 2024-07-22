@@ -21,20 +21,47 @@ let IncidentsController = class IncidentsController {
     constructor(incidentsService) {
         this.incidentsService = incidentsService;
     }
-    create(createIncidentDto) {
-        return this.incidentsService.create(createIncidentDto);
+    async create(createIncidentDto) {
+        try {
+            return await this.incidentsService.create(createIncidentDto);
+        }
+        catch (error) {
+            if (error.code) {
+                throw new common_1.NotFoundException('Foreign Key does not exist');
+            }
+        }
     }
-    findAll() {
-        return this.incidentsService.findAll();
+    async findAll() {
+        return await this.incidentsService.findAll();
     }
-    findOne(id) {
-        return this.incidentsService.findOne(+id);
+    async findOne(id) {
+        const incidentsService = await this.incidentsService.findOne(id);
+        if (!incidentsService) {
+            throw new common_1.NotFoundException(`Incident with id ${id} not found`);
+        }
+        return incidentsService;
     }
-    update(id, updateIncidentDto) {
-        return this.incidentsService.update(+id, updateIncidentDto);
+    async update(id, updateIncidentDto) {
+        try {
+            const incidentsService = await this.incidentsService.update(id, updateIncidentDto);
+            return incidentsService;
+        }
+        catch (error) {
+            if (error.code === 'P2025') {
+                throw new common_1.NotFoundException(`Status with id ${id} not found`);
+            }
+            throw error;
+        }
     }
-    remove(id) {
-        return this.incidentsService.remove(+id);
+    async remove(id) {
+        try {
+            return await this.incidentsService.remove(+id);
+        }
+        catch (error) {
+            if (error.code === 'P2025') {
+                throw new common_1.NotFoundException(`Status with id ${id} not found`);
+            }
+        }
     }
 };
 exports.IncidentsController = IncidentsController;
@@ -43,35 +70,35 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_incident_dto_1.CreateIncidentDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], IncidentsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], IncidentsController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
 ], IncidentsController.prototype, "findOne", null);
 __decorate([
-    (0, common_1.Patch)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_incident_dto_1.UpdateIncidentDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Number, update_incident_dto_1.UpdateIncidentDto]),
+    __metadata("design:returntype", Promise)
 ], IncidentsController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
 ], IncidentsController.prototype, "remove", null);
 exports.IncidentsController = IncidentsController = __decorate([
     (0, common_1.Controller)('incidents'),

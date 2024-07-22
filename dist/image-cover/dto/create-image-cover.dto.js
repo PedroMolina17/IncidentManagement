@@ -19,4 +19,9 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateImageCoverDto.prototype, "description", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Number)
+], CreateImageCoverDto.prototype, "incidents_id", void 0);
 //# sourceMappingURL=create-image-cover.dto.js.map

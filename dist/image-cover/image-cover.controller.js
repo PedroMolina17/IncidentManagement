@@ -25,16 +25,22 @@ let ImageCoverController = class ImageCoverController {
         this.imageCoverService = imageCoverService;
     }
     async postImageDescription(file, body) {
-        if (!file) {
-            throw new common_1.BadRequestException('File is missing');
+        try {
+            if (!file) {
+                throw new common_1.BadRequestException('File is missing');
+            }
+            const filePath = `/images/image-cover/${file.filename}`;
+            const createImageCoverDto = {
+                img_url: filePath,
+                description: body.description,
+                incidents_id: body.incidents_id,
+            };
+            const savedImage = await this.imageCoverService.create(createImageCoverDto);
+            return savedImage;
         }
-        const filePath = `/images/image-cover/${file.filename}`;
-        const createImageCoverDto = {
-            img_url: filePath,
-            description: body.description,
-        };
-        const savedImage = await this.imageCoverService.create(createImageCoverDto);
-        return savedImage;
+        catch (error) {
+            console.error(error);
+        }
     }
     findAll() {
         return this.imageCoverService.findAll();

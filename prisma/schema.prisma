@@ -41,23 +41,22 @@ model incidents {
   incidents_id      Int             @id @default(autoincrement())
   title             String
   description       String
-  ubication         String
   date              DateTime        @default(now())
   status            status?         @relation(fields: [status_id], references: [status_id])
   status_id         Int?
   type_incidents    type_incidents? @relation(fields: [type_incidents_id], references: [type_incidents_id])
   type_incidents_id Int?
-  image_cover       image_cover?    @relation(fields: [image_cover_id], references: [image_cover_id])
-  image_cover_id    Int?
   room              room?           @relation(fields: [room_id], references: [room_id])
   room_id           Int?
+  image_cover       image_cover[]
 }
 
 model image_cover {
   image_cover_id    Int                 @id @default(autoincrement())
   img_url           String
   description       String
-  incidents         incidents[]
+  incidents         incidents?          @relation(fields: [incidents_id], references: [incidents_id])
+  incidents_id      Int?
   image_description image_description[]
 }
 
@@ -71,12 +70,12 @@ model image_description {
 
 model status {
   status_id   Int         @id @default(autoincrement())
-  description String
-  incident_id incidents[]
+  description String      @unique
+  incidents   incidents[]
 }
 
 model type_incidents {
   type_incidents_id Int         @id @default(autoincrement())
   description       String
-  incident_id       incidents[]
+  incidents         incidents[]
 }

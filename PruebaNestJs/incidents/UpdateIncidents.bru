@@ -1,0 +1,15 @@
+meta {
+  name: UpdateIncidents
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://localhost:3000/incidents/7
+  body: json
+  auth: none
+}
+
+body:json {
+  {"title":"aaaaaaaaa"}
+}

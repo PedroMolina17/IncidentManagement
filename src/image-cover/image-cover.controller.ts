@@ -36,16 +36,22 @@ export class ImageCoverController {
     @UploadedFile() file: Express.Multer.File,
     @Body() body: CreateImageCoverDto,
   ) {
-    if (!file) {
-      throw new BadRequestException('File is missing');
+    try {
+      if (!file) {
+        throw new BadRequestException('File is missing');
+      }
+      const filePath = `/images/image-cover/${file.filename}`;
+      const createImageCoverDto: CreateImageCoverDto = {
+        img_url: filePath,
+        description: body.description,
+        incidents_id: body.incidents_id,
+      };
+      const savedImage =
+        await this.imageCoverService.create(createImageCoverDto);
+      return savedImage;
+    } catch (error) {
+      console.error(error);
     }
-    const filePath = `/images/image-cover/${file.filename}`;
-    const createImageCoverDto: CreateImageCoverDto = {
-      img_url: filePath,
-      description: body.description,
-    };
-    const savedImage = await this.imageCoverService.create(createImageCoverDto);
-    return savedImage;
   }
 
   @Get()

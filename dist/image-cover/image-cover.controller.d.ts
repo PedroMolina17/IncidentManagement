@@ -9,25 +9,30 @@ export declare class ImageCoverController {
         image_cover_id: number;
         img_url: string;
         description: string;
+        incidents_id: number;
     }>;
     findAll(): Promise<{
         image_cover_id: number;
         img_url: string;
         description: string;
+        incidents_id: number;
     }[]>;
     findOne(id: number): Promise<{
         image_cover_id: number;
         img_url: string;
         description: string;
+        incidents_id: number;
     }>;
     update(file: Express.Multer.File, id: number, body: UpdateImageCoverDto): Promise<{
         image_cover_id: number;
         img_url: string;
         description: string;
+        incidents_id: number;
     }>;
     remove(id: number): Promise<{
         image_cover_id: number;
         img_url: string;
         description: string;
+        incidents_id: number;
     }>;
 }

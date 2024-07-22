@@ -25,16 +25,6 @@ __decorate([
     __metadata("design:type", String)
 ], CreateIncidentDto.prototype, "description", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], CreateIncidentDto.prototype, "ubication", void 0);
-__decorate([
-    (0, class_validator_1.IsDate)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", Date)
-], CreateIncidentDto.prototype, "date", void 0);
-__decorate([
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
@@ -48,10 +38,5 @@ __decorate([
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
-], CreateIncidentDto.prototype, "image_cover_id", void 0);
-__decorate([
-    (0, class_validator_1.IsNumber)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", Number)
-], CreateIncidentDto.prototype, "users_id", void 0);
+], CreateIncidentDto.prototype, "room_id", void 0);
 //# sourceMappingURL=create-incident.dto.js.map

@@ -7,12 +7,6 @@ export class CreateIncidentDto {
   @IsString()
   @IsNotEmpty()
   description: string;
-  @IsString()
-  @IsNotEmpty()
-  ubication: string;
-  @IsDate()
-  @IsNotEmpty()
-  date: Date;
   @IsNumber()
   @IsNotEmpty()
   status_id: number;
@@ -21,8 +15,5 @@ export class CreateIncidentDto {
   type_incidents_id: number;
   @IsNumber()
   @IsNotEmpty()
-  image_cover_id: number;
-  @IsNumber()
-  @IsNotEmpty()
-  users_id: number;
+  room_id: number;
 }
