@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateImageCoverDto {
@@ -7,5 +8,6 @@ export class CreateImageCoverDto {
   description: string;
   @IsNumber()
   @IsNotEmpty()
+  @Type(() => Number)
   incidents_id: number;
 }

@@ -50,7 +50,11 @@ export class ImageCoverController {
         await this.imageCoverService.create(createImageCoverDto);
       return savedImage;
     } catch (error) {
-      console.error(error);
+      if (error.code === 'P2003') {
+        throw new BadRequestException(
+          `The incidents_id ${body.incidents_id} does not exist`,
+        );
+      }
     }
   }
 

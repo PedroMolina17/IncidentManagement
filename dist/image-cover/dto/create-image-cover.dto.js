@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateImageCoverDto = void 0;
+const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 class CreateImageCoverDto {
 }
@@ -22,6 +23,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.IsNotEmpty)(),
+    (0, class_transformer_1.Type)(() => Number),
     __metadata("design:type", Number)
 ], CreateImageCoverDto.prototype, "incidents_id", void 0);
 //# sourceMappingURL=create-image-cover.dto.js.map
