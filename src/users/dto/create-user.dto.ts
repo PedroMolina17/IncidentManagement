@@ -22,4 +22,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsNumber()
   type_user_id: number;
+  @IsNotEmpty()
+  @IsNumber()
+  room_id: number;
 }

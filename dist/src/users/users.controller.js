@@ -19,11 +19,13 @@ const create_user_dto_1 = require("./dto/create-user.dto");
 const update_user_dto_1 = require("./dto/update-user.dto");
 const user_guard_1 = require("../auth/user.guard");
 const count_user_dto_1 = require("./dto/count-user.dto");
+const admin_guard_1 = require("../auth/admin.guard");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
     }
     async create(createUserDto) {
+        const { room_id } = createUserDto;
         try {
             return await this.usersService.create(createUserDto);
         }
@@ -31,7 +33,10 @@ let UsersController = class UsersController {
             if (error.code === 'P2002') {
                 throw new common_1.BadRequestException('The Email already exists');
             }
-            throw error;
+            else if (error.code === 'P2003') {
+                throw new common_1.NotFoundException(`The Type ${room_id} User not found`);
+            }
+            throw error.code;
         }
     }
     async findAll(query) {
@@ -99,7 +104,6 @@ __decorate([
 ], UsersController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
-    (0, common_1.UseGuards)(user_guard_1.UserGuard),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -113,6 +117,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "countAll", null);
 __decorate([
+    (0, common_1.UseGuards)(user_guard_1.UserGuard, admin_guard_1.AdminGuard),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),

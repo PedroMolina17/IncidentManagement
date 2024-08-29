@@ -17,24 +17,28 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserGuard } from 'src/auth/user.guard';
 import { CountDto } from './dto/count-user.dto';
+import { AdminGuard } from 'src/auth/admin.guard';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
+    const { room_id } = createUserDto;
     try {
       return await this.usersService.create(createUserDto);
     } catch (error) {
       if (error.code === 'P2002') {
         throw new BadRequestException('The Email already exists');
+      } else if (error.code === 'P2003') {
+        throw new NotFoundException(`The Type ${room_id} User not found`);
       }
-      throw error;
+      throw error.code;
     }
   }
 
+  // @UseGuards(AdminGuard)
   @Get()
-  @UseGuards(UserGuard)
   async findAll(@Query() query: any) {
     return await this.usersService.findAll(query);
   }
@@ -44,6 +48,7 @@ export class UsersController {
     return this.usersService.count(query);
   }
 
+  @UseGuards(UserGuard, AdminGuard)
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
     try {
