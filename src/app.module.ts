@@ -16,7 +16,7 @@ import { RoomModule } from './room/room.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'),
+      rootPath: join(__dirname, '..', '..', 'public'),
     }),
     IncidentTypesModule,
     TypeUsersModule,

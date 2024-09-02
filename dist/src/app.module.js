@@ -28,7 +28,7 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             serve_static_1.ServeStaticModule.forRoot({
-                rootPath: (0, path_1.join)(__dirname, '..', 'public'),
+                rootPath: (0, path_1.join)(__dirname, '..', '..', 'public'),
             }),
             incident_types_module_1.IncidentTypesModule,
             type_users_module_1.TypeUsersModule,
