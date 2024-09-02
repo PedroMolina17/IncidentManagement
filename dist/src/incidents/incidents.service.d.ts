@@ -13,7 +13,14 @@ export declare class IncidentsService {
         type_incidents_id: number;
         room_id: number;
     }>;
-    findAll(): Promise<{
+    findAll(): Promise<({
+        image_cover: {
+            image_cover_id: number;
+            img_url: string;
+            description: string;
+            incidents_id: number;
+        }[];
+    } & {
         incidents_id: number;
         title: string;
         description: string;
@@ -21,8 +28,22 @@ export declare class IncidentsService {
         status_id: number;
         type_incidents_id: number;
         room_id: number;
-    }[]>;
+    })[]>;
     findOne(id: number): Promise<{
+        image_cover: ({
+            image_description: {
+                image_description_id: number;
+                img_url: string;
+                description: string;
+                image_cover_id: number;
+            }[];
+        } & {
+            image_cover_id: number;
+            img_url: string;
+            description: string;
+            incidents_id: number;
+        })[];
+    } & {
         incidents_id: number;
         title: string;
         description: string;

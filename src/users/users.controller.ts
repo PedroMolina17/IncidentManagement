@@ -16,8 +16,8 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserGuard } from 'src/auth/user.guard';
-import { CountDto } from './dto/count-user.dto';
 import { AdminGuard } from 'src/auth/admin.guard';
+import { CountDto } from './dto/count-user.dto';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}

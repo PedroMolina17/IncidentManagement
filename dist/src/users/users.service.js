@@ -37,7 +37,10 @@ let UsersService = class UsersService {
         if (filters.email) {
             where.email = { contains: filters.email };
         }
-        return await this.prisma.users.findMany({ where });
+        return await this.prisma.users.findMany({
+            where,
+            include: { typeusers: true, room: true },
+        });
     }
     async findOne(id) {
         return await this.prisma.users.findUnique({ where: { user_id: id } });

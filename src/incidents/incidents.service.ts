@@ -11,12 +11,15 @@ export class IncidentsService {
   }
 
   async findAll() {
-    return await this.prisma.incidents.findMany();
+    return await this.prisma.incidents.findMany({
+      include: { image_cover: true },
+    });
   }
 
   async findOne(id: number) {
     return await this.prisma.incidents.findUnique({
       where: { incidents_id: id },
+      include: { image_cover: { include: { image_description: true } } },
     });
   }
 

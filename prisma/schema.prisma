@@ -58,6 +58,8 @@ model image_cover {
   incidents         incidents?          @relation(fields: [incidents_id], references: [incidents_id])
   incidents_id      Int?
   image_description image_description[]
+
+  @@unique([incidents_id])
 }
 
 model image_description {

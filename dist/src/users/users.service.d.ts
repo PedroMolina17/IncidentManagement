@@ -13,14 +13,23 @@ export declare class UsersService {
         room_id: number;
     }>;
     count(filters?: any): Promise<number>;
-    findAll(filters?: any): Promise<{
+    findAll(filters?: any): Promise<({
+        typeusers: {
+            type_user_id: number;
+            description: string;
+        };
+        room: {
+            room_id: number;
+            name: string;
+        };
+    } & {
         user_id: number;
         username: string;
         email: string;
         password: string;
         type_user_id: number;
         room_id: number;
-    }[]>;
+    })[]>;
     findOne(id: number): Promise<{
         user_id: number;
         username: string;

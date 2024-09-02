@@ -13,14 +13,23 @@ export declare class UsersController {
         type_user_id: number;
         room_id: number;
     }>;
-    findAll(query: any): Promise<{
+    findAll(query: any): Promise<({
+        typeusers: {
+            type_user_id: number;
+            description: string;
+        };
+        room: {
+            room_id: number;
+            name: string;
+        };
+    } & {
         user_id: number;
         username: string;
         email: string;
         password: string;
         type_user_id: number;
         room_id: number;
-    }[]>;
+    })[]>;
     countAll(query: CountDto): Promise<number>;
     findOne(id: number): Promise<{
         user_id: number;

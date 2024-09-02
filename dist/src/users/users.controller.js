@@ -18,8 +18,8 @@ const users_service_1 = require("./users.service");
 const create_user_dto_1 = require("./dto/create-user.dto");
 const update_user_dto_1 = require("./dto/update-user.dto");
 const user_guard_1 = require("../auth/user.guard");
-const count_user_dto_1 = require("./dto/count-user.dto");
 const admin_guard_1 = require("../auth/admin.guard");
+const count_user_dto_1 = require("./dto/count-user.dto");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
